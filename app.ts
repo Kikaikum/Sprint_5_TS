@@ -1,4 +1,4 @@
-const API_URL="https://icanhazdadjoke.com/";
+const API_URL:string="https://icanhazdadjoke.com/";
 
 
 function AddJoke(){
