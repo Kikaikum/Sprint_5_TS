@@ -1,11 +1,11 @@
 const API_URL:string="https://icanhazdadjoke.com/";
-
+const API_URL1:string="https://api.chucknorris.io/jokes/random";
 interface Acudit{
   joke:string;
   score:number;
   date:string;
 }
-//const reportAcudits:any=[];
+
 var reportAcudits:Array<Acudit>=[];
 
 
@@ -29,6 +29,37 @@ function AddJoke(){
     console.error("ERROR: ", err.message)
   });
 }
+function AddJoke1(){
+  fetch(API_URL1, {
+  headers: {
+      'Accept':'application/json'
+  }
+})
+.then(response => {
+  if (response.ok)        
+      return response.json();    
+})  
+.then(function(data) {    
+  var chiste:string=data.value;    
+  const dom:HTMLElement=document.getElementById("jokes") as HTMLElement;       
+  dom.innerHTML = chiste;
+  
+})
+.catch(err => {
+  console.error("ERROR: ", err.message)
+});
+}
+
+
+function Jokes(){
+  var kike=Math.floor(Math.random() * (1 + 1));
+  if (kike==0){
+    AddJoke();
+  }
+  else{
+    AddJoke1();
+  }
+}
 
 function Joke(puntos:number){
   const joke=document.getElementById("jokes")?.textContent;
@@ -44,7 +75,7 @@ function Joke(puntos:number){
     reportAcudits.push(acudit);
     console.log(reportAcudits);
   }  
-  AddJoke();
+  Jokes();
 }
 
 

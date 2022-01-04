@@ -1,6 +1,6 @@
 "use strict";
 const API_URL = "https://icanhazdadjoke.com/";
-//const reportAcudits:any=[];
+const API_URL1 = "https://api.chucknorris.io/jokes/random";
 var reportAcudits = [];
 function AddJoke() {
     fetch(API_URL, {
@@ -21,6 +21,34 @@ function AddJoke() {
         console.error("ERROR: ", err.message);
     });
 }
+function AddJoke1() {
+    fetch(API_URL1, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+        if (response.ok)
+            return response.json();
+    })
+        .then(function (data) {
+        var chiste = data.value;
+        const dom = document.getElementById("jokes");
+        dom.innerHTML = chiste;
+    })
+        .catch(err => {
+        console.error("ERROR: ", err.message);
+    });
+}
+function Jokes() {
+    var kike = Math.floor(Math.random() * (1 + 1));
+    if (kike == 0) {
+        AddJoke();
+    }
+    else {
+        AddJoke1();
+    }
+}
 function Joke(puntos) {
     var _a;
     const joke = (_a = document.getElementById("jokes")) === null || _a === void 0 ? void 0 : _a.textContent;
@@ -35,5 +63,5 @@ function Joke(puntos) {
         reportAcudits.push(acudit);
         console.log(reportAcudits);
     }
-    AddJoke();
+    Jokes();
 }
