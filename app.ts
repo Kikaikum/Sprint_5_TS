@@ -1,12 +1,13 @@
 const API_URL:string="https://icanhazdadjoke.com/";
 
-const reportAcudits:any=[];
-const acudit={};
 interface Acudit{
   joke:string;
   score:number;
   date:string;
 }
+//const reportAcudits:any=[];
+var reportAcudits:Array<Acudit>=[];
+
 
 function AddJoke(){
     fetch(API_URL, {
@@ -31,20 +32,18 @@ function AddJoke(){
 
 function Joke(puntos:number){
   const joke=document.getElementById("jokes")?.textContent;
-  const d = new Date();
-  let text = d.toISOString();
+  const data = new Date();
+  let dataISO = data.toISOString();
   
   if(joke !=" " && joke){
     let acudit: Acudit={
       joke:joke,
       score:puntos,
-      date:text
-    };
+      date:dataISO
+    };    
     reportAcudits.push(acudit);
     console.log(reportAcudits);
-  }
-  
-  
+  }  
   AddJoke();
 }
 

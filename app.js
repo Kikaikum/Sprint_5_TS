@@ -1,7 +1,7 @@
 "use strict";
 const API_URL = "https://icanhazdadjoke.com/";
-const reportAcudits = [];
-const acudit = {};
+//const reportAcudits:any=[];
+var reportAcudits = [];
 function AddJoke() {
     fetch(API_URL, {
         headers: {
@@ -24,13 +24,13 @@ function AddJoke() {
 function Joke(puntos) {
     var _a;
     const joke = (_a = document.getElementById("jokes")) === null || _a === void 0 ? void 0 : _a.textContent;
-    const d = new Date();
-    let text = d.toISOString();
+    const data = new Date();
+    let dataISO = data.toISOString();
     if (joke != " " && joke) {
         let acudit = {
             joke: joke,
             score: puntos,
-            date: text
+            date: dataISO
         };
         reportAcudits.push(acudit);
         console.log(reportAcudits);
