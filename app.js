@@ -1,7 +1,8 @@
 "use strict";
 const API_URL = "https://icanhazdadjoke.com/";
 const API_URL1 = "https://api.chucknorris.io/jokes/random";
-const API_TEMPS = "https://api.openweathermap.org/data/2.5/weather?q=Barcelona&appid=346f8bb1ddd8277be9af5c999b9520d1";
+const API_TEMPS = "https://www.el-tiempo.net/api/json/v2/provincias/08";
+let oldJoke;
 var reportAcudits = [];
 function AddJoke() {
     fetch(API_URL, {
@@ -55,7 +56,7 @@ function Joke(puntos) {
     const joke = (_a = document.getElementById("jokes")) === null || _a === void 0 ? void 0 : _a.textContent;
     const data = new Date();
     let dataISO = data.toISOString();
-    if (joke != " " && joke) {
+    if (joke != oldJoke && joke) {
         let acudit = {
             joke: joke,
             score: puntos,
@@ -65,6 +66,9 @@ function Joke(puntos) {
         console.log(reportAcudits);
     }
     ShowJokes();
+    if (joke) {
+        oldJoke = joke;
+    }
 }
 function temps() {
     fetch(API_TEMPS, {})
@@ -73,8 +77,8 @@ function temps() {
             return response.json();
     })
         .then(function (data) {
-        let temps = data.weather[0].description;
-        const dom = document.getElementById("jokes");
+        let temps = "El tiempo hoy: " + data.ciudades[6].stateSky.description;
+        const dom = document.getElementById("temps");
         dom.innerHTML = temps;
     })
         .catch(err => {
@@ -83,4 +87,5 @@ function temps() {
 }
 window.onload = function () {
     temps();
+    ShowJokes();
 };
