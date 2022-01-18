@@ -71,13 +71,15 @@ function Joke(puntos) {
     }
 }
 function temps() {
-    fetch(API_TEMPS, {})
+    fetch(API_TEMPS)
         .then(response => {
         if (response.ok)
             return response.json();
     })
         .then(function (data) {
-        let temps = "El tiempo hoy: " + data.ciudades[6].stateSky.description;
+        let tempMax = data.ciudades[6].temperatures.max;
+        let tempMin = data.ciudades[6].temperatures.min;
+        let temps = "Tiempo: " + data.ciudades[6].stateSky.description + "<br>" + " Temperatura: MAX=" + tempMax + "ºC MIN=" + tempMin + "ºC";
         const dom = document.getElementById("temps");
         dom.innerHTML = temps;
     })
